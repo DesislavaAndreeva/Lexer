@@ -38,23 +38,23 @@ This lexical analyzer should recognize:
 
 • **Symbols** (type 400): 
 
-        **(** (code 404);
+        ( (code 404);
         
-        **)** (code  405); 
+        ) (code 405); 
         
-        **;** (code 408);
+        ; (code 408);
 
 • **Operators** (type 400):
 
-      **+** (code 401); 
+      + (code 401); 
       
-      ***** (code 402); 
+      * (code 402); 
       
-      **=** (code 403); 
+      = (code 403); 
       
-      **>** (code 407); 
+      > (code 407); 
       
-      **<** (code 406);
+      < (code 406);
       
       
  # Compile
