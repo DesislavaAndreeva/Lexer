@@ -2,6 +2,10 @@
 
 # General info
 
+University evaluation project in formal languages and language processors
+
+# Description
+
 Lexical analysis is the first phase of a compiler. It takes the modified source code from language preprocessors that are written in the form of sentences. The lexical analyzer breaks these syntaxes into a series of tokens, by removing any whitespace or comments in the source code.
 
 If the lexical analyzer finds a token invalid, it generates an error. The lexical analyzer works closely with the syntax analyzer. It reads character streams from the source code, checks for legal tokens, and passes the data to the syntax analyzer when it demands.
@@ -27,20 +31,31 @@ int (keyword), value (identifier), = (operator), 100 (constant) and ; (symbol).
 This lexical analyzer should recognize:
 
 • **Identifier** (type/code = 100/0);
+
 • **Real constant** (type/code = 200/0);
+
 • **Keywords** (type 300) - **if** (code 301), **else** (code 302), **for** (code 303);
 
 • **Symbols** (type 400): 
+
         **(** (code 404);
+        
         **)** (code  405); 
+        
         **;** (code 408);
 
 • **Operators** (type 400):
+
       **+** (code 401); 
+      
       ***** (code 402); 
+      
       **=** (code 403); 
+      
       **>** (code 407); 
+      
       **<** (code 406);
+      
       
  # Compile
  
@@ -82,5 +97,3 @@ for ( i=0; i<10; i++)
 ====================================================================
 ```
  
-# TODO 
-Makefile
