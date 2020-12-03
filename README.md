@@ -30,7 +30,7 @@ int (keyword), value (identifier), = (operator), 100 (constant) and ; (symbol).
 
 This lexical analyzer should recognize:
 
-• **Identifier** (type/code = 100/0);
+• **Identifier** that starts with a letter, contains numbers and underline (type/code = 100/0);
 
 • **Real constant** (type/code = 200/0);
 
