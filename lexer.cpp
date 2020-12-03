@@ -21,6 +21,7 @@ bool isRealConst(string token);
 bool isIdentifier(string token);
 void print_dividers(char lookahead);
 
+/*This table contains the glammar rules*/
 typedef map<string, pair<int, int> > table;
 regex identifier ("^[A-Za-z][0-9A-Za-z]*(_[0-9A-Za-z]+)*$");
 regex float_rex ("[-+]?([0-9]*[.])?[0-9]*");
@@ -45,32 +46,32 @@ int main(int argc, char* argv[])
 	sprintf ( output + strlen ( output ), "--------------------------------------------------------------------%s", LOG_NEWLINE );
 	cout << output;
 	
+	/*inspect the entered test character by character*/
 	for (int i = 0; i < line.length(); i++) {
 		lookahead = line[i];
-				
+		
+		/*If its a symbol )( or ; print in the table output*/
 		if (isSymbol(lookahead)) {
 			print_dividers(lookahead);
 			cout << setw(8) << " Symbol";
 			cout <<  setw(10) << "| ' " << lookahead << " ' " ;
 			cout << endl;
-			analyze(token);
 			token.clear();
-		}
+		} /*If its an operator + = * < > print in the table output*/
 		else if (isOperator(lookahead)) {
 			print_dividers(lookahead);
 			cout << setw(10) << " Operator";
 			cout << setw(8) << "| ' " << lookahead << " ' " ;
 			cout << endl;
-			analyze(token);
 			token.clear();
-		} 
+		} /*If the character is alphanumeric or _ . - add in token because it could be part of an identifier, keyword or real constant*/
 		else if (isalnum(lookahead) || lookahead == '_' || lookahead == '.' || lookahead == '-' ) {
 			token.push_back(lookahead);
-		} else if( (isWhitespace(lookahead)) && token.length() != 0){
+		} else if( (isWhitespace(lookahead)) && token.length() != 0){ /*If whitespace is encountered and the token is not empty - analyze the token*/
 			analyze(token);
 			token.clear();
 		} else {
-			if(isWhitespace(lookahead) == false){
+			if(isWhitespace(lookahead) == false){ /*In any other case print error*/
 				cout << "|" << setw(2) << "X" << setw(11) << "| X";
 				cout << setw(13) << "|  Error "  ;
 				cout << setw(10) << "| ' " << lookahead << " ' " ;
@@ -79,6 +80,7 @@ int main(int argc, char* argv[])
 		}
 	}
 	
+	/*If you encountered the end of the input and the token is not empty - analyze token*/
 	if(token.length() > 0)
 		analyze(token);
 	
@@ -88,6 +90,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+/*Fill the table with the grammar rules*/
 void fill_table()
 {
 	t["identifier"] = make_pair(100, 0);
@@ -105,6 +108,7 @@ void fill_table()
 	t[";"] = make_pair(400, 408);	
 }
 
+/*Get type code and number for symbols and operators from the grammar table and print it*/
 void print_dividers(char lookahead)
 {
 	pair<int, int> val;
@@ -118,6 +122,7 @@ void print_dividers(char lookahead)
 
 }
 
+/*Get type code and number for identifier, keyword and real constant from the grammar table and print it*/
 void print_val(string token)
 {
 	pair<int, int> val;
@@ -128,6 +133,7 @@ void print_val(string token)
 	cout << setw(8) << "| " << val.second;
 }
 
+/*Analyze identifier, keywords and real constant*/
 void analyze(string token) {
 	if (token.length() > 0) {
 		if (isKeyword(token)) {
@@ -186,6 +192,7 @@ bool isKeyword(string token) {
 	}
 }
 
+/*The identifier should always start with letter and can contain underscore _ and numbers*/
 bool isIdentifier(string token) {
 	if ( regex_match (token, identifier)) 
 		return true;
